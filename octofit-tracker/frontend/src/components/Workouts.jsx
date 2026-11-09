@@ -1,5 +1,10 @@
 import CollectionPage from './CollectionPage.jsx'
 
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
+const apiUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/workouts/`
+  : 'http://localhost:8000/api/workouts/'
+
 const columns = [
   { key: 'name', label: 'Workout', render: (workout) => workout.name },
   { key: 'category', label: 'Category', render: (workout) => workout.category },
@@ -16,7 +21,7 @@ function Workouts() {
   return (
     <CollectionPage
       title="Workouts"
-      endpoint="workouts"
+      endpoint={apiUrl}
       columns={columns}
       emptyMessage="No workouts are available yet."
     />

@@ -1,5 +1,10 @@
 import CollectionPage from './CollectionPage.jsx'
 
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
+const apiUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/activities/`
+  : 'http://localhost:8000/api/activities/'
+
 const columns = [
   { key: 'type', label: 'Activity', render: (activity) => activity.type },
   {
@@ -25,7 +30,7 @@ function Activities() {
   return (
     <CollectionPage
       title="Activities"
-      endpoint="activities"
+      endpoint={apiUrl}
       columns={columns}
       emptyMessage="No activities have been recorded yet."
     />

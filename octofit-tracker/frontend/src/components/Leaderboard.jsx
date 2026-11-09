@@ -1,5 +1,10 @@
 import CollectionPage from './CollectionPage.jsx'
 
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
+const apiUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/leaderboard/`
+  : 'http://localhost:8000/api/leaderboard/'
+
 const columns = [
   { key: 'rank', label: 'Rank', render: (entry) => `#${entry.rank}` },
   {
@@ -20,7 +25,7 @@ function Leaderboard() {
   return (
     <CollectionPage
       title="Leaderboard"
-      endpoint="leaderboard"
+      endpoint={apiUrl}
       columns={columns}
       emptyMessage="The leaderboard is waiting for its first results."
     />

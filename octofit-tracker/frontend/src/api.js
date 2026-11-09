@@ -1,10 +1,5 @@
-const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
-const apiBaseUrl = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev`
-  : 'http://localhost:8000'
-
-export async function fetchCollection(endpoint, { signal } = {}) {
-  const response = await fetch(`${apiBaseUrl}/api/${endpoint}/`, { signal })
+export async function fetchCollection(url, { signal } = {}) {
+  const response = await fetch(url, { signal })
   if (!response.ok) {
     throw new Error(`Request failed (${response.status} ${response.statusText})`)
   }
